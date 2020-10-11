@@ -11,6 +11,8 @@ import org.json.JSONObject;
 import br.com.bksolutionsdomotica.modelo.SocketBase;
 
 public class UserHardwares {
+	
+	private static final String LOG_OUT = "Você foi desconectado";
 
 	private static final String CODE_REQUEST_GETKEYS = "getKeys";
 	private static final String CODE_REQUEST_GETKEY = "getKey";
@@ -53,7 +55,7 @@ public class UserHardwares {
 		case CODE_REQUEST_SETKEYS:
 			JSONObject keys = comando.getJSONObject(CHAVE_KEYS);
 			cliente.getCliente().setChaves(mac, keys);
-			hardware = hardwares.get(MAC_KEY);
+			hardware = hardwares.get(mac);
 			hardware.sendCommand(comando.toString());
 
 			for (SocketBase sb : clientes) {
@@ -68,7 +70,7 @@ public class UserHardwares {
 			key = comando.getString(CHAVE_KEY);
 			String value = comando.getString(VALUE_KEY);
 			cliente.getCliente().setChave(mac, key, value);
-			hardware = hardwares.get(MAC_KEY);
+			hardware = hardwares.get(mac);
 			hardware.sendCommand(comando.toString());
 
 			for (SocketBase sb : clientes) {
@@ -131,8 +133,9 @@ public class UserHardwares {
 		}
 	}
 
-	public void removeCliente(SocketBase cliente) {
+	public void removeCliente(SocketBase cliente) throws IOException {
 		if (clientes.contains(cliente)) {
+			cliente.sendCommand(LOG_OUT);
 			clientes.remove(cliente);
 		}
 	}
@@ -151,8 +154,9 @@ public class UserHardwares {
 		}
 	}
 
-	public void removeHardware(SocketBase hardware) {
+	public void removeHardware(SocketBase hardware) throws IOException {
 		if (hardwares.containsKey(hardware.getHardware().getMac())) {
+			hardware.sendCommand(LOG_OUT);
 			hardwares.remove(hardware.getHardware().getMac());
 		}
 	}

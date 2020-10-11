@@ -52,13 +52,6 @@ public class ServerCoreBK {
 		return;
 	}
 
-//	public Cliente clienteLogado(String email, String senha) throws ClassNotFoundException, SQLException {
-//		Cliente cliente = null;
-//		BKClienteDAO clienteDAO = new BKClienteDAO();
-//		cliente = clienteDAO.logarCliente(email, senha);
-//		return cliente;
-//	}
-
 //	public void enviaComando(SocketBase sb, String command) throws IOException {
 //		if (sb != null && command != null && !command.isEmpty()) {
 //			serverCore.comando = command;
@@ -92,11 +85,13 @@ public class ServerCoreBK {
 				for (SocketBase sb : listaTemporaria) {
 					try {
 						runOnce(sb);
-//						System.out.println(MyServerBk.getGerenciador().toString());// Retirar isso depois
+						System.out.println(MyServerBk.getGerenciador().toString());// Retirar isso depois
 					} catch (ClassNotFoundException e) {
 						e.printStackTrace();
 					} catch (SQLException e) {
 						e.printStackTrace();
+					} catch (Exception e) {
+						System.out.println("Agora sim");
 					}
 				}
 			}
@@ -209,10 +204,6 @@ public class ServerCoreBK {
 
 		public void onClienteCommand(SocketBase socketBase, JSONObject jsonObject)
 				throws IOException, ClassNotFoundException, SQLException;
-
-		public boolean clienteLogado();
-
-		public boolean hardwareLogado();
 
 	}
 }

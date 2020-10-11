@@ -33,7 +33,7 @@ public class ClientsManager {
 		}
 	}
 
-	public void removeCliente(SocketBase cliente) {
+	public void removeCliente(SocketBase cliente) throws IOException {
 		if (cliente == null)
 			return;
 		int id = cliente.getCliente().getId();
@@ -69,7 +69,7 @@ public class ClientsManager {
 		}
 	}
 
-	public void removeHardware(SocketBase hardware) throws ClassNotFoundException, SQLException {
+	public void removeHardware(SocketBase hardware) throws ClassNotFoundException, SQLException, IOException {
 		if (hardware == null)
 			return;
 		int id = MyServerBk.getCodCliente(hardware.getHardware());

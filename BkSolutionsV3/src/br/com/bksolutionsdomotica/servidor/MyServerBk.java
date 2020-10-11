@@ -28,15 +28,9 @@ public class MyServerBk implements ServerCoreBK.InterfaceCommand {
 		}
 	}
 
-	// Método criado para Debug juntamente com o Servidor.java
+//	 Método criado para Debug juntamente com o Servidor.java
 	public static ClientsManager getGerenciador() {
 		return gerenciador;
-	}
-
-	@Override
-	public boolean hardwareLogado() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -51,19 +45,13 @@ public class MyServerBk implements ServerCoreBK.InterfaceCommand {
 	}
 
 	@Override
-	public void onHardwareSignOut(SocketBase socketBase) throws ClassNotFoundException, SQLException, IOException {
-		
+	public void onHardwareSignOut(SocketBase hardware) throws ClassNotFoundException, SQLException, IOException {
+		gerenciador.removeHardware(hardware);
 	}
 
 	@Override
 	public void onHardwareCommand(SocketBase socketBase, JSONObject jsonObject) throws IOException, ClassNotFoundException, SQLException {
 		gerenciador.onHardwareCommand(socketBase, jsonObject);
-	}
-
-	@Override
-	public boolean clienteLogado() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -78,9 +66,8 @@ public class MyServerBk implements ServerCoreBK.InterfaceCommand {
 	}
 
 	@Override
-	public void onClienteSignOut(SocketBase socketBase) throws ClassNotFoundException, SQLException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("Logout Cliente");
+	public void onClienteSignOut(SocketBase cliente) throws ClassNotFoundException, SQLException, IOException {
+		gerenciador.removeCliente(cliente);
 	}
 
 //		ATENÇÃO AQUI
