@@ -1,3 +1,4 @@
+package br.com.bksolutionsdomotica;
 import java.io.IOException;
 
 import br.com.bksolutionsdomotica.servidor.MyServerBk;
