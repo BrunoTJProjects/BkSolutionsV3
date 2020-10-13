@@ -133,9 +133,14 @@ public class UserHardwares {
 		}
 	}
 
-	public void removeCliente(SocketBase cliente) throws IOException {
+	public void removeCliente(SocketBase cliente) {
 		if (clientes.contains(cliente)) {
-			cliente.sendCommand(LOG_OUT);
+			try {
+				cliente.sendCommand(LOG_OUT);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			clientes.remove(cliente);
 			cliente.setCliente(null);
 		}
@@ -155,9 +160,14 @@ public class UserHardwares {
 		}
 	}
 
-	public void removeHardware(SocketBase hardware) throws IOException {
+	public void removeHardware(SocketBase hardware) {
 		if (hardwares.containsKey(hardware.getHardware().getMac())) {
-			hardware.sendCommand(LOG_OUT);			
+			try {
+				hardware.sendCommand(LOG_OUT);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
 			hardwares.remove(hardware.getHardware().getMac());
 			hardware.setHardware(null);
 		}

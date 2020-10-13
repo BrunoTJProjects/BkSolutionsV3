@@ -93,7 +93,7 @@ public class ServerCoreBK {
 					} catch (SQLException e) {
 						e.printStackTrace();
 					} catch (Exception e) {
-						System.out.println("Agora sim");
+						e.printStackTrace();
 					}
 				}
 			}
@@ -166,6 +166,14 @@ public class ServerCoreBK {
 				enviarComando(sb);
 
 			} catch (IOException e) {
+				if(sb.isLogado()) {
+					if(sb.isCliente()) {
+						interfaceCommand.onClienteSignOut(sb);
+					}
+					if(sb.isHardware()) {
+						interfaceCommand.onHardwareSignOut(sb);
+					}
+				}
 				removeSocketBase(sb);
 				e.printStackTrace();
 			}
@@ -206,6 +214,6 @@ public class ServerCoreBK {
 
 		public void onClienteCommand(SocketBase socketBase, JSONObject jsonObject)
 				throws IOException, ClassNotFoundException, SQLException;
-
+		
 	}
 }

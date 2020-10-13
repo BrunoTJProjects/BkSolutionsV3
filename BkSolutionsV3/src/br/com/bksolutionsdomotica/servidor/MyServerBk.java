@@ -70,11 +70,9 @@ public class MyServerBk implements ServerCoreBK.InterfaceCommand {
 		gerenciador.removeCliente(cliente);
 	}
 
-//		ATENÇÃO AQUI
 	@Override
 	public void onClienteCommand(SocketBase socketBase, JSONObject comando)
 			throws IOException, ClassNotFoundException, SQLException {
-
 		gerenciador.onClienteCommand(socketBase, comando);
 	}
 
