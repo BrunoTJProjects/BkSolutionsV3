@@ -137,6 +137,7 @@ public class UserHardwares {
 		if (clientes.contains(cliente)) {
 			cliente.sendCommand(LOG_OUT);
 			clientes.remove(cliente);
+			cliente.setCliente(null);
 		}
 	}
 
@@ -156,8 +157,9 @@ public class UserHardwares {
 
 	public void removeHardware(SocketBase hardware) throws IOException {
 		if (hardwares.containsKey(hardware.getHardware().getMac())) {
-			hardware.sendCommand(LOG_OUT);
+			hardware.sendCommand(LOG_OUT);			
 			hardwares.remove(hardware.getHardware().getMac());
+			hardware.setHardware(null);
 		}
 	}
 

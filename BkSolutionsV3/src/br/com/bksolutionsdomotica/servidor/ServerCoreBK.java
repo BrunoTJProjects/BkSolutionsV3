@@ -62,9 +62,11 @@ public class ServerCoreBK {
 //		}
 //	}
 
-	public void removeSocketBase(SocketBase sc) throws IOException {
-		sc.closeResouces();
-		socketsBase.remove(sc);
+	public void removeSocketBase(SocketBase sb) throws IOException {
+		sb.setHardware(null);
+		sb.setCliente(null);
+		sb.closeResouces();
+		socketsBase.remove(sb);
 	}
 
 	private class ServerCore extends Thread {
@@ -97,7 +99,7 @@ public class ServerCoreBK {
 			}
 		}
 
-		private void runOnce(SocketBase sb) throws ClassNotFoundException, SQLException {
+		private void runOnce(SocketBase sb) throws ClassNotFoundException, SQLException, IOException {
 
 			try {
 				String string = sb.commandReceiver();
@@ -164,7 +166,7 @@ public class ServerCoreBK {
 				enviarComando(sb);
 
 			} catch (IOException e) {
-
+				removeSocketBase(sb);
 				e.printStackTrace();
 			}
 

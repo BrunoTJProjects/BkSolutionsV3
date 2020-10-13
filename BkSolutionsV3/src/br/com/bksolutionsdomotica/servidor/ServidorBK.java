@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.List;
 
 import br.com.bksolutionsdomotica.modelo.SocketBase;
+import utils.TimeOut;
 
 public class ServidorBK implements Runnable {
 
@@ -27,6 +28,7 @@ public class ServidorBK implements Runnable {
 			System.out.println("Servidor ouvindo na porta " + port);
 			while (true) {
 				socket = serverSocket.accept();
+				socket.setKeepAlive(true);
 				onSocketConnected(socket);
 			}
 		} catch (IOException e) {
@@ -42,9 +44,9 @@ public class ServidorBK implements Runnable {
 	}
 
 	private void onSocketConnected(Socket socket) throws IOException {
-		SocketBase sc = new SocketBase(socket);
-		socketClientes.add(sc);
-//		new TimeOut(null, socket).start();
+		SocketBase sb = new SocketBase(socket);
+		socketClientes.add(sb);
+		new TimeOut(sb).start();
 		System.out.println("cliente connectado/ Total: " + socketClientes.size());
 	}
 
