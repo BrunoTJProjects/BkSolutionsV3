@@ -18,6 +18,7 @@ public class ServidorBK implements Runnable {
 		super();
 		this.port = port;
 		this.socketClientes = socketClientes;
+		new TimeOut(socketClientes).start();
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class ServidorBK implements Runnable {
 	private void onSocketConnected(Socket socket) throws IOException {
 		SocketBase sb = new SocketBase(socket);
 		socketClientes.add(sb);
-		new TimeOut(sb).start();
+//		new TimeOut(socketClientes).start();
 		System.out.println("cliente connectado/ Total: " + socketClientes.size());
 	}
 
