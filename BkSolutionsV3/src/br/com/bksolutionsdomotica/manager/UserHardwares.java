@@ -157,6 +157,8 @@ public class UserHardwares {
 	public void addHardware(SocketBase hardware) throws ClassNotFoundException, SQLException {
 		if (!hardwares.containsKey(hardware.getHardware().getMac())) {
 			hardwares.put(hardware.getHardware().getMac(), hardware);
+		}else {
+			hardware.setHardware(null);
 		}
 	}
 

@@ -124,7 +124,6 @@ public class ServerCoreBK {
 
 								case COMMAND_REQUEST:									
 									interfaceCommand.onHardwareCommand(sb, requisicao);
-									System.out.println(requisicao.getJSONObject("dados"));
 									break;
 								}
 							} else if (sb.isCliente()) {
