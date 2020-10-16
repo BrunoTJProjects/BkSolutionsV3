@@ -1,12 +1,13 @@
 package utils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.bksolutionsdomotica.modelo.SocketBase;
 
 public class TimeOut extends Thread {
-	List<SocketBase> socketsBase;
+	private volatile List<SocketBase> socketsBase;
 
 	public TimeOut(List<SocketBase> socketsBase) {
 		this.socketsBase = socketsBase;
@@ -14,24 +15,32 @@ public class TimeOut extends Thread {
 
 	@Override
 	public void run() {
+		long contador = 0;
+		
 		do {
+			System.out.println(System.currentTimeMillis() - contador);
+			contador = System.currentTimeMillis();
 			try {
 				sleep(6000);
 			} catch (InterruptedException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
-			for (SocketBase sb : socketsBase) {
+
+			List<SocketBase> listaTemporaria = new ArrayList<SocketBase>(socketsBase);
+
+			for (SocketBase sb : listaTemporaria) {
 				try {
 					sb.sendCommand("\0");
-					sleep(0, 100);
-				} catch (IOException | InterruptedException e) {
+				} catch (IOException e) {
 
 					e.printStackTrace();
+					System.out.println("Primeiro erro");
 					try {
 						sb.closeResouces();
 					} catch (IOException e1) {
 						e1.printStackTrace();
+						System.out.println("Segundo Erro");
 					}
 				}
 			}
