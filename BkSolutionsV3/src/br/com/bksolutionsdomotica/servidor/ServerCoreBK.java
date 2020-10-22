@@ -10,9 +10,10 @@ import org.json.JSONObject;
 import br.com.bksolutionsdomotica.modelo.SocketBase;
 
 public class ServerCoreBK {
-	public static final String LOGIN_REQUEST = "login_request";
-	public static final String LOGOUT_REQUEST = "logout_request";
-	public static final String COMMAND_REQUEST = "command_request";
+	private static final String LOGIN_REQUEST		= "login_request";
+	private static final String LOGOUT_REQUEST		= "logout_request";
+	private static final String COMMAND_REQUEST		= "command_request";
+	private static final String IS_LOGGED_REQUEST	= "is_logged_request";
 
 	public static final String TYPE_CLIENTE = "cliente";
 	public static final String TYPE_HARDWARE = "hardware";
@@ -116,6 +117,9 @@ public class ServerCoreBK {
 						String tipoReq = requisicao.getString("tipoReq");
 						
 						if (sb.isLogado()) {
+							if (IS_LOGGED_REQUEST.equals(tipoReq)) {
+								sb.sendCommand("yes");
+							}
 							if (sb.isHardware()) {
 								switch (tipoReq) {
 								case LOGOUT_REQUEST:
@@ -138,6 +142,9 @@ public class ServerCoreBK {
 								}
 							}
 						} else {
+							if (IS_LOGGED_REQUEST.equals(tipoReq)) {
+								sb.sendCommand("no");
+							}
 							if (deviceType != null && !deviceType.isEmpty()) {
 								if (deviceType.equals(TYPE_HARDWARE)) {
 
