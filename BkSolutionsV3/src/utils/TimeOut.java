@@ -15,7 +15,7 @@ public class TimeOut extends Thread {
 
 	@Override
 	public void run() {
-		long contador = 0;
+		long contador = System.currentTimeMillis();
 		
 		do {
 			System.out.println(System.currentTimeMillis() - contador);
