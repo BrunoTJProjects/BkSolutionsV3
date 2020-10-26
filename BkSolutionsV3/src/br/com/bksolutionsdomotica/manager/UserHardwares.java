@@ -12,7 +12,7 @@ import br.com.bksolutionsdomotica.modelo.SocketBase;
 
 public class UserHardwares {
 	
-	private static final String LOG_OUT = "Você foi desconectado";
+	private static final String LOG_OUT = "Voce foi desconectado";
 
 	private static final String CODE_REQUEST_GETKEYS = "getKeys";
 	private static final String CODE_REQUEST_GETKEY = "getKey";
@@ -25,7 +25,7 @@ public class UserHardwares {
 	private static final String VALUE_KEY = "value";
 	private static final String CHAVE_KEYS = "keys";
 
-	private static final String HARDWARE_NOT_CONNECTED = "Este dispositivo não está conectado";
+	private static final String HARDWARE_NOT_CONNECTED = "Este dispositivo nao esta conectado";
 	private static final String SUCESS_MSG = "ok";
 
 	private List<SocketBase> clientes = new ArrayList<SocketBase>();
