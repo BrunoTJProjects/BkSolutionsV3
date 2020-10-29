@@ -171,7 +171,7 @@ public class ServerCoreBK {
 				}
 				enviarComando(sb);
 
-			} catch (IOException e) {
+			} catch (IOException | NullPointerException e) {
 				if(sb.isLogado()) {
 					if(sb.isCliente()) {
 						interfaceCommand.onClienteSignOut(sb);
