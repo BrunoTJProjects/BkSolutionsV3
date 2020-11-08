@@ -46,11 +46,13 @@ public class UserHardwares {
 
 		switch (request) {
 		case CODE_REQUEST_GETKEYS:
-			cliente.sendCommand(cliente.getCliente().getChaves(mac).toString());
+			comando.put(CHAVE_KEYS, cliente.getCliente().getChaves(mac));
+			cliente.sendCommand(comando.toString());
 			break;
-		case CODE_REQUEST_GETKEY:
+		case CODE_REQUEST_GETKEY:			
 			key = comando.getString(CHAVE_KEY);
-			cliente.sendCommand(cliente.getCliente().getChave(mac, key));
+			comando.put(VALUE_KEY, cliente.getCliente().getChave(mac, key));
+			cliente.sendCommand(comando.toString());
 			break;
 		case CODE_REQUEST_SETKEYS:
 			JSONObject keys = comando.getJSONObject(CHAVE_KEYS);
