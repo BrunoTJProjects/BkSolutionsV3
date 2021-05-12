@@ -50,8 +50,13 @@ public class MyServerBk implements ServerCoreBK.InterfaceCommand {
 	}
 
 	@Override
-	public void onHardwareCommand(SocketBase socketBase, JSONObject jsonObject) throws IOException, ClassNotFoundException, SQLException {
-		gerenciador.onHardwareCommand(socketBase, jsonObject);
+	public void onHardwareCommand(SocketBase socketBase, JSONObject jsonObject) {
+		try {
+			gerenciador.onHardwareCommand(socketBase, jsonObject);
+		} catch (ClassNotFoundException | SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -71,9 +76,13 @@ public class MyServerBk implements ServerCoreBK.InterfaceCommand {
 	}
 
 	@Override
-	public void onClienteCommand(SocketBase socketBase, JSONObject comando)
-			throws IOException, ClassNotFoundException, SQLException {
-		gerenciador.onClienteCommand(socketBase, comando);
+	public void onClienteCommand(SocketBase socketBase, JSONObject comando) {
+		try {
+			gerenciador.onClienteCommand(socketBase, comando);
+		} catch (ClassNotFoundException | IOException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static synchronized int getCodCliente(Hardware hardware) throws SQLException, ClassNotFoundException {
